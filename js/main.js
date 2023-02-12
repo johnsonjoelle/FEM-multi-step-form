@@ -42,10 +42,12 @@ const step4 = document.getElementById('step-4');
 const step5 = document.getElementById('step-5');
 const steps = [step1, step2, step3, step4, step5];
 const sidebarNums = document.getElementsByClassName('sidebar-num');
+const changeLink = document.getElementById('change-plan');
 
 const planArc = document.getElementById('arcade');
 const planAdv = document.getElementById('advanced');
 const planPro = document.getElementById('pro');
+const sliderLabels = document.getElementsByClassName('slider-label');
 
 let confirmationCheck = false;
 const backBtn = document.getElementById('back-btn');
@@ -55,7 +57,14 @@ let currentStep = 1;
 // **** Plan Duration Functions ****
 function changeYearly() {
   yearlyCheck.checked ? yearly=true : yearly=false;
-  changeCost()
+  changeCost();
+  if (yearly) {
+    sliderLabels[0].classList.remove('active');
+    sliderLabels[1].classList.add('active');
+  } else {
+    sliderLabels[0].classList.add('active');
+    sliderLabels[1].classList.remove('active');
+  }
   // console.log(`Yearly: ${yearly}`);
 }
 function changeCost() {
@@ -136,16 +145,46 @@ function removePlanHighlight() {
   }
 }
 function changeOnline() {
-  onlineCheck.checked ? online=true : online=false;
+  if (onlineCheck.checked) {
+    online = true;
+    document.getElementById('online-container').classList.add('active');
+  } else {
+    online = false;
+    document.getElementById('online-container').classList.remove('active');
+  }
 }
 function changeStorage() {
-  storageCheck.checked ? storage=true : storage=false;
+  if (storageCheck.checked) {
+    storage = true;
+    document.getElementById('storage-container').classList.add('active');
+  } else {
+    storage = false;
+    document.getElementById('storage-container').classList.remove('active');
+  }
 }
 function changeProfile() {
-  profileCheck.checked ? profile=true : profile = false;
+  if (profileCheck.checked) {
+    profile = true;
+    document.getElementById('profile-container').classList.add('active');
+  } else {
+    profile = false;
+    document.getElementById('profile-container').classList.remove('active');
+  }
 }
 
 // ****Summary Page Functions *****
+function checkCheckmarks() {
+  // Browser saves the state of checkmarks, 
+  // so user may load the form with states already checked
+  // the following makes sure of the check states of checkmarks
+  onlineCheck.checked ? online=true : online=false;
+  storageCheck.checked ? storage=true : storage=false;
+  profileCheck.checked ? profile=true : profile = false;
+  changeYearly();
+  changeOnline();
+  changeStorage();
+  changeProfile();
+}
 function printPlan() {
   let title = "";
   let duration = "";
@@ -179,9 +218,9 @@ function printAddons() {
       price = onlineCost;
       totalCost += onlineCost;
       addonConent += `
-        <div class="summary summary-addon">
+        <div class="summary-addon">
           <p class="summary-addon-title">${title}</p>
-          <p id="summary-addon-cost">+$${price}/${unit}</p>
+          <p class="summary-addon-cost">+$${price}/${unit}</p>
         </div>`;
     }
     if (storage) {
@@ -189,9 +228,9 @@ function printAddons() {
       price = storageCost;
       totalCost += storageCost;
       addonConent += `
-        <div class="summary summary-addon">
+        <div class="summary-addon">
           <p class="summary-addon-title">${title}</p>
-          <p id="summary-addon-cost">+$${price}/${unit}</p>
+          <p class="summary-addon-cost">+$${price}/${unit}</p>
         </div>`;
     }
     if (profile) {
@@ -199,12 +238,11 @@ function printAddons() {
       price = profileCost;
       totalCost += profileCost;
       addonConent += `
-        <div class="summary summary-addon">
+        <div class="summary-addon">
           <p class="summary-addon-title">${title}</p>
-          <p id="summary-addon-cost">+$${price}/${unit}</p>
+          <p class="summary-addon-cost">+$${price}/${unit}</p>
         </div>`;
     }
-    console.log(addonConent);
     document.getElementById('summary-addons-list').innerHTML = addonConent;
   }
 }
@@ -228,6 +266,7 @@ function goToNextStep() {
     if (currentStep==2) {
       showBackButton()
     };
+    console.log(currentStep);
     hideNavButtons(); 
     if (currentStep==4) {
       printSummary();
@@ -259,6 +298,17 @@ function findStep(step) {
     }
   }
 }
+function goToPlans() {
+  const oldStep = currentStep - 1;
+  const newStep = 1
+  let oldStepView = findStep(oldStep);
+  let newStepView = findStep(newStep);
+  changeSidebarHighlight(oldStep, newStep);
+  currentStep = 2;
+  checkButtonText();
+  oldStepView.classList.add('hidden');
+  newStepView.classList.remove('hidden');
+}
 
 function changeSidebarHighlight(step, next) {
   if (next < 4) {
@@ -286,10 +336,10 @@ function changeNextButton(check) {
   check ? nextBtn.innerText = "Confirm" : nextBtn.innerText = "Next Step";
 }
 function hideBackButton() {
-  backBtn.disabled = true;
+  backBtn.classList.add('hidden');
 }
 function showBackButton() {
-  backBtn.disabled = false;
+  backBtn.classList.remove('hidden');
 }
 function hideNavButtons() {
   if (currentStep==5) {
@@ -328,4 +378,7 @@ window.onload = () => {
     removePlanHighlight();
     planPro.classList.add('active');
   });
+  changeLink.addEventListener('click', goToPlans);
+
+  checkCheckmarks();
 };

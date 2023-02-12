@@ -18,29 +18,37 @@
         <div class="sidebar-num active" data-id="0">
           <p>1</p>
         </div>
-        <p class="sidebar-line-1">Step 1</p>
-        <p class="sidebar-line-2">Your info</p>
+        <div class="desktop-only">
+          <p class="sidebar-line-1">Step 1</p>
+          <p class="sidebar-line-2">Your info</p>
+        </div>
       </div>
       <div class="sidebar-step">
         <div class="sidebar-num" data-id="1">
           <p>2</p>
         </div>
-        <p class="sidebar-line-1">Step 2</p>
-        <p class="sidebar-line-2">Select plan</p>
+        <div class="desktop-only">
+          <p class="sidebar-line-1">Step 2</p>
+          <p class="sidebar-line-2">Select plan</p>
+        </div>
       </div>
       <div class="sidebar-step">
         <div class="sidebar-num" data-id="2">
           <p>3</p>
         </div>
-        <p class="sidebar-line-1">Step 3</p>
-        <p class="sidebar-line-2">Add-ons</p>
+        <div class="desktop-only">
+          <p class="sidebar-line-1">Step 3</p>
+          <p class="sidebar-line-2">Add-ons</p>
+        </div>
       </div>
       <div class="sidebar-step">
         <div class="sidebar-num" data-id="3">
           <p>4</p>
         </div>
-        <p class="sidebar-line-1">Step 4</p>
-        <p class="sidebar-line-2">Summary</p>
+        <div class="desktop-only">
+          <p class="sidebar-line-1">Step 4</p>
+          <p class="sidebar-line-2">Summary</p>
+        </div>
       </div>
     </aside>
     <!-- Sidebar End -->
@@ -50,12 +58,12 @@
 
         <!-- Step 1 Start -->
         <section id="step-1" class="form-step">
-          <h1>Personal info</h1>
+          <h2 class="section-title">Personal info</h2>
           <p class="step-guide">Please provide your name, email address, and phone number.</p>
           <label for="name">Name</label>
           <input type="text" name="name" id="name" placeholder="e.g. Stephen King">
           <label for="email">Email Address</label>
-          <input type="text" name="email" id="email" placeholder="e.g. stephenking@lorem.com">
+          <input type="email" name="email" id="email" placeholder="e.g. stephenking@lorem.com">
           <label for="phone">Phone Number</label>
           <input type="text" name="phone" id="phone" placeholder="e.g. +1 234 567 890">
         </section>
@@ -63,24 +71,24 @@
 
         <!-- Step 2 Start -->
         <section id="step-2" class="form-step hidden">
-          <h1>Select your plan</h1>
+          <h2 class="section-title">Select your plan</h2>
           <p class="step-guide">You have the option of monthly or yearly billing.</p>
           <div class="plans">
             <div class="plan card active" id="arcade">
               <img src="assets/images/icon-arcade.svg" class="plan-icon">
-              <h2 class="plan-title">Arcade</h2>
+              <h3 class="plan-title">Arcade</h3>
               <p class="plan-cost">$<span id="arc-cost">9</span>/<span class="unit">mo</span></p>
               <p class="yearly plan-special hidden">2 months free</p>
             </div>
             <div class="plan card" id="advanced">
               <img src="assets/images/icon-advanced.svg" class="plan-icon">
-              <h2 class="plan-title">Advanced</h2>
+              <h3 class="plan-title">Advanced</h3>
               <p class="plan-cost">$<span id="adv-cost">12</span>/<span class="unit">mo</span></p>
               <p class="yearly plan-special hidden">2 months free</p>
             </div>
             <div class="plan card" id="pro">
               <img src="assets/images/icon-pro.svg" class="plan-icon">
-              <h2 class="plan-title">Pro</h2>
+              <h3 class="plan-title">Pro</h3>
               <p class="plan-cost">$<span id="pro-cost">15</span>/<span class="unit">mo</span></p>
               <p class="yearly plan-special hidden">2 months free</p>
             </div>
@@ -98,29 +106,44 @@
 
         <!-- Step 3 Start -->
         <section id="step-3" class="form-step hidden">
-          <h1>Pick add-ons</h1>
+          <h2 class="section-title">Pick add-ons</h2>
           <p class="step-guide">Add-ons help enhance your gaming experience.</p>
-          <fieldset>
+          <fieldset class="add-on card" id="online-container">
             <label for="online">
-              <input type="checkbox" name="online" id="online">
-              <h2>Online service</h2>
-              <p>Access to multiplayer games</p>
+              <div class="checkbox-container">
+                <input type="checkbox" name="online" id="online">
+                <span class="checkbox"></span>
+              </div>
+              <div class="addon-desc">
+                <h3>Online service</h3>
+                <p>Access to multiplayer games</p>
+              </div>
               <p class="addon-cost">+$<span id="online-cost">1</span>/<span class="unit">mo</span></p>
             </label>
           </fieldset>
-          <fieldset>
+          <fieldset class="add-on card" id="storage-container">
             <label for="storage">
-              <input type="checkbox" name="storage" id="storage">
-              <h2>Larger storage</h2>
-              <p>Extra 1TB of cloud save</p>
+              <div class="checkbox-container">
+                <input type="checkbox" name="storage" id="storage">
+                <span class="checkbox"></span>
+              </div>
+              <div class="addon-desc">
+                <h3>Larger storage</h3>
+                <p>Extra 1TB of cloud save</p>
+              </div>
               <p class="addon-cost">+$<span id="storage-cost">2</span>/<span class="unit">mo</span></p>
             </label>
           </fieldset>
-          <fieldset>
+          <fieldset class="add-on card" id="profile-container">
             <label for="profile">
-              <input type="checkbox" name="profile" id="profile">
-              <h2>Customizable profile</h2>
-              <p>Custom theme on your profile</p>
+              <div class="checkbox-container">
+                <input type="checkbox" name="profile" id="profile">
+                <span class="checkbox"></span>
+              </div>
+              <div class="addon-desc">
+                <h3>Customizable profile</h3>
+                <p>Custom theme on your profile</p>
+              </div>
               <p class="addon-cost">+$<span id="profile-cost">2</span>/<span class="unit">mo</span></p>
             </label>
           </fieldset>
@@ -129,33 +152,38 @@
 
         <!-- Step 4 Start -->
         <section id="step-4" class="form-step hidden">
-          <h1>Finishing up</h1>
+          <h2 class="section-title">Finishing up</h2>
           <p class="step-guide">Double-check everything looks OK before confirming.</p>
           <div class="summary summary-plan">
-            <p id="summary-plan-title"></p>
-            <p id="change-plan">Change</p>
-            <p class="summary-plan-cost" class="blue-text">$<span id="summary-plan-cost"></span>/<span class="unit">mo</span></p>
+            <div>
+              <p id="summary-plan-title"></p>
+              <p id="change-plan">Change</p>
+            </div>
+            <p class="summary-plan-cost">$<span id="summary-plan-cost"></span>/<span class="unit">mo</span></p>
           </div>
-          <div id="summary-addons-list">
+          <div class="summary">
+            <div class="summary-division" id="summary-addons-list"></div>
           </div>
           <div class="summary summary-total">
             <p>Total (per <span id="summary-plan-type">month</span>)</p>
-            <p class="total-cost purple-text">$<span id="total-cost"></span>/<span class="unit">mo</span></p>
+            <p class="total-cost">+$<span id="total-cost"></span>/<span class="unit">mo</span></p>
           </div>
         </section>
         <!-- Step 4 End -->
 
         <!-- Step 5 Start -->
         <section id="step-5" class="form-step hidden">
-          <img src="assets/images/icon-checkmark.svg">
-          <h2 class="blue-text">Thank you!</h2>
+          <div>
+            <img src="assets/images/icon-thank-you.svg">
+          </div>
+          <h1 class="thanks">Thank you!</h1>
           <p>Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com.</p>
         </section>
         <!-- Step 5 End -->
 
       </section>
       <section class="button-container" id="buttons">
-        <button id="back-btn" class="back-btn" disabled>Go Back</button>
+        <button id="back-btn" class="back-btn hidden">Go Back</button>
         <button id="next-btn">Next Step</button>
       </section>
     </form>
@@ -165,7 +193,7 @@
   
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    Coded by <a href="https://joellejohnson.com">Joelle Johnson</a>.
   </div>
 
   <script src="js/main.js"></script>
