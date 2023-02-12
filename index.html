@@ -5,122 +5,169 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Multi-step form</title>
+  <link rel="stylesheet" href="css/style.css">
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <title>Frontend Mentor | Multi-step form</title>
 </head>
 <body>
 
-  <!-- Sidebar start -->
+  <main>
+    <!-- Sidebar Start -->
+    <aside class="sidebar">
+      <div class="sidebar-step">
+        <div class="sidebar-num active" data-id="0">
+          <p>1</p>
+        </div>
+        <p class="sidebar-line-1">Step 1</p>
+        <p class="sidebar-line-2">Your info</p>
+      </div>
+      <div class="sidebar-step">
+        <div class="sidebar-num" data-id="1">
+          <p>2</p>
+        </div>
+        <p class="sidebar-line-1">Step 2</p>
+        <p class="sidebar-line-2">Select plan</p>
+      </div>
+      <div class="sidebar-step">
+        <div class="sidebar-num" data-id="2">
+          <p>3</p>
+        </div>
+        <p class="sidebar-line-1">Step 3</p>
+        <p class="sidebar-line-2">Add-ons</p>
+      </div>
+      <div class="sidebar-step">
+        <div class="sidebar-num" data-id="3">
+          <p>4</p>
+        </div>
+        <p class="sidebar-line-1">Step 4</p>
+        <p class="sidebar-line-2">Summary</p>
+      </div>
+    </aside>
+    <!-- Sidebar End -->
 
-  Step 1
-  Your info
+    <form>
+      <section class="form-container">
 
-  Step 2
-  Select plan
+        <!-- Step 1 Start -->
+        <section id="step-1" class="form-step">
+          <h1>Personal info</h1>
+          <p class="step-guide">Please provide your name, email address, and phone number.</p>
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" placeholder="e.g. Stephen King">
+          <label for="email">Email Address</label>
+          <input type="text" name="email" id="email" placeholder="e.g. stephenking@lorem.com">
+          <label for="phone">Phone Number</label>
+          <input type="text" name="phone" id="phone" placeholder="e.g. +1 234 567 890">
+        </section>
+        <!-- Step 1 End -->
 
-  Step 3
-  Add-ons
+        <!-- Step 2 Start -->
+        <section id="step-2" class="form-step hidden">
+          <h1>Select your plan</h1>
+          <p class="step-guide">You have the option of monthly or yearly billing.</p>
+          <div class="plans">
+            <div class="plan card active" id="arcade">
+              <img src="assets/images/icon-arcade.svg" class="plan-icon">
+              <h2 class="plan-title">Arcade</h2>
+              <p class="plan-cost">$<span id="arc-cost">9</span>/<span class="unit">mo</span></p>
+              <p class="yearly plan-special hidden">2 months free</p>
+            </div>
+            <div class="plan card" id="advanced">
+              <img src="assets/images/icon-advanced.svg" class="plan-icon">
+              <h2 class="plan-title">Advanced</h2>
+              <p class="plan-cost">$<span id="adv-cost">12</span>/<span class="unit">mo</span></p>
+              <p class="yearly plan-special hidden">2 months free</p>
+            </div>
+            <div class="plan card" id="pro">
+              <img src="assets/images/icon-pro.svg" class="plan-icon">
+              <h2 class="plan-title">Pro</h2>
+              <p class="plan-cost">$<span id="pro-cost">15</span>/<span class="unit">mo</span></p>
+              <p class="yearly plan-special hidden">2 months free</p>
+            </div>
+          </div>
+          <div class="plan-slider-container">
+            <p class="slider-label active">Monthly</p>
+            <label class="switch">
+              <input type="checkbox" id="plan-slider" class="hidden-check">
+              <span class="slider"></span>
+            </label>
+            <p class="slider-label">Yearly</p>
+          </div>
+        </section>
+        <!-- Step 2 End -->
 
-  Step 4
-  Summary
+        <!-- Step 3 Start -->
+        <section id="step-3" class="form-step hidden">
+          <h1>Pick add-ons</h1>
+          <p class="step-guide">Add-ons help enhance your gaming experience.</p>
+          <fieldset>
+            <label for="online">
+              <input type="checkbox" name="online" id="online">
+              <h2>Online service</h2>
+              <p>Access to multiplayer games</p>
+              <p class="addon-cost">+$<span id="online-cost">1</span>/<span class="unit">mo</span></p>
+            </label>
+          </fieldset>
+          <fieldset>
+            <label for="storage">
+              <input type="checkbox" name="storage" id="storage">
+              <h2>Larger storage</h2>
+              <p>Extra 1TB of cloud save</p>
+              <p class="addon-cost">+$<span id="storage-cost">2</span>/<span class="unit">mo</span></p>
+            </label>
+          </fieldset>
+          <fieldset>
+            <label for="profile">
+              <input type="checkbox" name="profile" id="profile">
+              <h2>Customizable profile</h2>
+              <p>Custom theme on your profile</p>
+              <p class="addon-cost">+$<span id="profile-cost">2</span>/<span class="unit">mo</span></p>
+            </label>
+          </fieldset>
+        </section>
+        <!-- Step 3 End -->
 
-  <!-- Sidebar end -->
+        <!-- Step 4 Start -->
+        <section id="step-4" class="form-step hidden">
+          <h1>Finishing up</h1>
+          <p class="step-guide">Double-check everything looks OK before confirming.</p>
+          <div class="summary summary-plan">
+            <p id="summary-plan-title"></p>
+            <p id="change-plan">Change</p>
+            <p class="summary-plan-cost" class="blue-text">$<span id="summary-plan-cost"></span>/<span class="unit">mo</span></p>
+          </div>
+          <div id="summary-addons-list">
+          </div>
+          <div class="summary summary-total">
+            <p>Total (per <span id="summary-plan-type">month</span>)</p>
+            <p class="total-cost purple-text">$<span id="total-cost"></span>/<span class="unit">mo</span></p>
+          </div>
+        </section>
+        <!-- Step 4 End -->
 
-  <!-- Step 1 start -->
+        <!-- Step 5 Start -->
+        <section id="step-5" class="form-step hidden">
+          <img src="assets/images/icon-checkmark.svg">
+          <h2 class="blue-text">Thank you!</h2>
+          <p>Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com.</p>
+        </section>
+        <!-- Step 5 End -->
 
-  Personal info
-  Please provide your name, email address, and phone number.
-
-  Name
-  e.g. Stephen King
-
-  Email Address
-  e.g. stephenking@lorem.com
-
-  Phone Number
-  e.g. +1 234 567 890
-
-  Next Step
-
-  <!-- Step 1 end -->
-
-  <!-- Step 2 start -->
-
-  Select your plan
-  You have the option of monthly or yearly billing.
-
-  Arcade
-  $9/mo
-
-  Advanced
-  $12/mo
-
-  Pro
-  $15/mo
-
-  Monthly
-  Yearly
-
-  Go Back
-  Next Step
-
-  <!-- Step 2 end -->
-
-  <!-- Step 3 start -->
-
-  Pick add-ons
-  Add-ons help enhance your gaming experience.
-
-  Online service
-  Access to multiplayer games
-  +$1/mo
-
-  Larger storage
-  Extra 1TB of cloud save
-  +$2/mo
-
-  Customizable Profile
-  Custom theme on your profile
-  +$2/mo
-
-  Go Back
-  Next Step
-
-  <!-- Step 3 end -->
-
-  <!-- Step 4 start -->
-
-  Finishing up
-  Double-check everything looks OK before confirming.
-
-  <!-- Dynamically add subscription and add-on selections here -->
-
-  Total (per month/year)
-
-  Go Back
-  Confirm
-
-  <!-- Step 4 end -->
-
-  <!-- Step 5 start -->
-
-  Thank you!
-
-  Thanks for confirming your subscription! We hope you have fun 
-  using our platform. If you ever need support, please feel free 
-  to email us at support@loremgaming.com.
-
-  <!-- Step 5 end -->
+      </section>
+      <section class="button-container" id="buttons">
+        <button id="back-btn" class="back-btn" disabled>Go Back</button>
+        <button id="next-btn">Next Step</button>
+      </section>
+    </form>
+    
+    <section class="overlay"></section>
+  </main>
   
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
   </div>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
