@@ -39,7 +39,7 @@
   font-weight: normal;
 }
 
-/* Text Colours */
+/* Text Colours
 .blue-text {
   color: var(--marine-blue);
 }
@@ -51,10 +51,10 @@
 }
 .white-text {
   color: var(--white);
-}
+} */
 
 body {
-  background-color: var(--light-blue);
+  background-color: var(--magnolia);
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -75,9 +75,13 @@ main {
   background-color: white;
   display: grid;
   grid-template-columns: 1fr 3fr;
+  box-shadow: 4px 4px 25px var(--light-grey);
 }
 .desktop-only {
   display: block;
+}
+.mobile-only {
+  display: none;
 }
 
 /* Sidebar */
@@ -131,7 +135,8 @@ main {
   display: none !important;
 }
 form {
-  padding: 0 var(--form-padding);
+  /* padding: 0 var(--form-padding); */
+  max-width: 980px;
   color: var(--cool-grey);
   min-height: 568px;
   position: relative;
@@ -141,6 +146,9 @@ form {
 }
 .form-step {
   padding-top: 2rem;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right:auto;
 }
 .section-title {
   color: var(--marine-blue);
@@ -164,6 +172,7 @@ form {
 .card:focus {
   border: 1px solid var(--purplish-blue);
 }
+
 /* Step 1 */
 #step-1 label {
   color: var(--marine-blue);
@@ -180,10 +189,28 @@ form {
   font-family: ubuntu;
   font-size: 1rem;
   font-weight: 600;
+  color: var(--marine-blue);
+  position: relative;
 }
 input::placeholder {
   color: var(--cool-grey);
   opacity: 1;
+}
+#step-1 input:invalid {
+  border: 1px solid var(--strawberry-red);
+}
+#step-1 input.error::after {
+  content: "This field is required";
+  color: var(--strawberry-red);
+  position: absolute;
+  top: -1rem;
+  display: inline-block;
+  width: 6rem;
+  height: 1rem;
+}
+#step-1 input:focus {
+  border: 1px solid var(--purplish-blue);
+  outline: none;
 }
 
 /* Step 2 */
@@ -403,14 +430,15 @@ input:checked + .slider:before {
 /* Buttons */
 .button-container {
   display: grid;
-  width: 100%;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right:auto;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "back next";
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 0 var(--form-padding) 1rem;
 }
 button {
   font-size: 1rem;
@@ -449,3 +477,222 @@ button {
 /* Footer - Attribution */
 .attribution { font-size: 11px; text-align: center; margin-top: 10px; }
 .attribution a { color: hsl(228, 45%, 44%); }
+
+@media screen and (max-width: 720px) {
+  .form-step,
+  .button-container {
+    padding-left: 1rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  /* Mobile */
+  .desktop-only {
+    display: none;
+  }
+  .mobile-only {
+    display: block;
+  }
+  body {
+    display: block;
+  }
+  main {
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr;
+    padding: 0 1rem;
+    background: none;
+    height: 100%;
+    box-shadow: none;
+  }
+  .background {
+    background-image: url(../assets/images/bg-sidebar-mobile.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+  }
+  .sidebar {
+    grid-row: 1/2;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+    background: none;
+  }
+  .sidebar-step {
+    display: block;
+    margin-bottom: 0;
+  }
+  .sidebar-num {
+    width: 2rem;
+    height: 2rem;
+    border-width: 1px;
+    font-size: 14px;
+  }
+  .sidebar-num p {
+    margin-bottom: 0;
+  }
+  form {
+    grid-row: 2/-1;
+  }
+  .form-container {
+    background-color: var(--white);
+    border-radius: var(--border-rad);
+    height: auto;
+    box-shadow: 0 1px 4px var(--light-grey);
+  }
+  .form-step {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 16px;
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .step-guide {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Step 1 */
+  #step-1 label {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  #step-1 input {
+    font-size: 15px;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 14px;
+  }
+
+  /* Step 2 */
+  .plans {
+    flex-direction: column;
+    margin-bottom: 2.5rem;
+  }
+  .plan {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 1rem;
+  }
+  .plan div > * {
+    margin-bottom: 4px;
+  }
+  .plan-icon {
+    margin-bottom: 0;
+  }
+  .plan-title {
+    font-weight: 600;;
+  }
+  .plan-cost {
+    font-size: 14px;
+  }
+  .plan-slider-container {
+    margin-bottom: 2rem;
+  }
+  .card {
+    border-radius: 8px;
+  }
+
+  /* Step 3 */
+  .add-on label {
+    gap: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .addon-desc {
+    font-size: 13px;
+  }
+  .addon-desc h3 {
+    font-size: 15px;
+  }
+  .addon-cost {
+    font-size: 12.5px;
+  }
+
+  /* Step 4 */
+  .summary {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .summary:not(.summary-plan) {
+    padding-top: 10px;
+    padding-bottom: 2px;
+    margin-bottom: 12px;
+  }
+  #summary-plan-title {
+    font-size: 15px;
+  }
+  .summary-division {
+    padding-top: 14px;
+  }
+  .summary-addon,
+  #change-plan,
+  .summary-plan-cost,
+  .summary-total {
+    font-size: 0.9rem;
+  }
+  .summary-addon {
+    padding-bottom: 16px;
+  }
+  #change-plan {
+    font-weight: 600;
+  }
+  .summary-total {
+    margin-top: 10px;
+  }
+  .total-cost {
+    font-size: 1rem;
+  }
+
+  /* Step 5 */
+  #step-5 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    gap: 15px;
+    font-size: 1rem;
+  }
+  .thanks-icon {
+    width: 55px;
+    margin-bottom: 5px;
+  }
+  .thanks-icon img {
+    max-width: 100%;
+    height: auto;
+  }
+  .thanks {
+    font-size: 1.5rem;
+  }
+  #step-5 p {
+    line-height: 1.45;
+  }
+
+  /* Buttons */
+  .button-container {
+    padding: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    background-color: var(--white);
+    border-radius: var(--magnolia);
+  }
+  #next-btn {
+    padding: 10px 14px 12px;
+    border-radius: 4px;
+  }
+  #next-btn,
+  .back-btn {
+    font-size: 14px;
+  }
+
+  .attribution {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 369px) {
+  .add-on label {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

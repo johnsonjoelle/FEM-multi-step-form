@@ -119,6 +119,19 @@ function changeCostTexts() {
   }
 }
 
+// **** Step 1 Validation Functions ****
+function checkEmpty(val) {}
+function nameCheck(val) {
+  let pattern = /^[a-zA-Z]+$/;
+  if (pattern.test(val)) {
+    return true;
+  }
+  return false;
+}
+function emailCheck() {}
+function phoneCheck() {}
+function checkForm() {}
+
 // **** Plan & Add-ons Functions ****
 function changePlan(id) {
   userPlan = id;
