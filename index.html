@@ -61,12 +61,12 @@
         <section id="step-1" class="form-step">
           <h2 class="section-title">Personal info</h2>
           <p class="step-guide">Please provide your name, email address, and phone number.</p>
-          <label for="name">Name</label>
-          <input type="text" name="name" id="name" placeholder="e.g. Stephen King" required>
-          <label for="email">Email Address</label>
-          <input type="email" name="email" id="email" placeholder="e.g. stephenking@lorem.com" required>
-          <label for="phone">Phone Number</label>
-          <input type="text" name="phone" id="phone" placeholder="e.g. +1 234 567 890" required>
+          <label for="name">Name<span class="error-msg hidden">This field is required</span></label>
+          <input type="text" name="name" id="name" placeholder="e.g. Stephen King" data-id="name">
+          <label for="email">Email Address<span class="error-msg hidden">This field is required</span></label>
+          <input type="text" name="email" id="email" placeholder="e.g. stephenking@lorem.com" data-id="email">
+          <label for="phone">Phone Number<span class="error-msg hidden">This field is required</span></label>
+          <input type="text" name="phone" id="phone" placeholder="e.g. +1 234 567 890" data-id="phone">
         </section>
         <!-- Step 1 End -->
 

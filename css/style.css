@@ -135,7 +135,6 @@ main {
   display: none !important;
 }
 form {
-  /* padding: 0 var(--form-padding); */
   max-width: 980px;
   color: var(--cool-grey);
   min-height: 568px;
@@ -176,9 +175,16 @@ form {
 /* Step 1 */
 #step-1 label {
   color: var(--marine-blue);
-  display: block;
+  /* display: block; */
+  display: flex;
+  justify-content: space-between;
   font-size: 14px;
   margin-bottom: 6px;
+}
+.error-msg {
+  color: var(--strawberry-red);
+  font-weight: bold;
+  display: inline-block;
 }
 #step-1 input {
   border: 1px solid var(--light-grey);
@@ -196,7 +202,7 @@ input::placeholder {
   color: var(--cool-grey);
   opacity: 1;
 }
-#step-1 input:invalid {
+#step-1 input.error {
   border: 1px solid var(--strawberry-red);
 }
 #step-1 input.error::after {
@@ -289,11 +295,6 @@ input:checked + .slider:before {
 }
 
 /* Step 3 */
-/* #step-3 fieldset {
-  border: 1px solid var(--light-grey);
-  border-radius: var(--border-rad);
-  padding: 1rem;
-} */
 .add-on.card {
   padding: 0;
   margin-bottom: 1rem;

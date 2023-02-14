@@ -25,7 +25,7 @@ const yearlyCheck = document.getElementById('plan-slider');
 const onlineCheck = document.getElementById('online');
 const storageCheck = document.getElementById('storage');
 const profileCheck = document.getElementById('profile');
-let arcadeCost= costs.monthly.arcade;
+let arcadeCost = costs.monthly.arcade;
 let advancedCost = costs.monthly.advanced;
 let proCost = costs.monthly.pro;
 let onlineCost = costs.monthly.online;
@@ -34,6 +34,15 @@ let profileCost = costs.monthly.profile;
 let userPlan = 1;
 let userPlanCost = arcadeCost;
 let totalCost = 0;
+
+const user = document.getElementById('name');
+const email = document.getElementById('email');
+const phone = document.getElementById('phone');
+const info = [
+  {input: user, check: nameCheck},
+  {input: email, check: emailCheck},
+  {input: phone, check: phoneCheck}
+];
 
 const step1 = document.getElementById('step-1');
 const step2 = document.getElementById('step-2');
@@ -65,7 +74,6 @@ function changeYearly() {
     sliderLabels[0].classList.add('active');
     sliderLabels[1].classList.remove('active');
   }
-  // console.log(`Yearly: ${yearly}`);
 }
 function changeCost() {
   if (yearly) {
@@ -120,17 +128,67 @@ function changeCostTexts() {
 }
 
 // **** Step 1 Validation Functions ****
-function checkEmpty(val) {}
+function checkEmpty(val) {
+  if(val.length == 0 || val == " ") {
+    return true;
+  }
+  return false;
+}
 function nameCheck(val) {
-  let pattern = /^[a-zA-Z]+$/;
+  let pattern = /^[a-z ,.'-]+$/i;
   if (pattern.test(val)) {
     return true;
   }
   return false;
 }
-function emailCheck() {}
-function phoneCheck() {}
-function checkForm() {}
+function emailCheck(val) {
+  let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (pattern.test(val)) {
+    return true;
+  }
+  return false;
+}
+function phoneCheck(val) {
+  let pattern = /^\+(?:[0-9]\s?){6,14}[0-9]$/;
+  console.log(val);
+  if (pattern.test(val)) {
+    return true;
+  }
+  return false;
+}
+function quickCheck(input) {
+  input.check(input.input.value) ? unhighlightError(input.input) : highlightError(input.input);
+  checkEmpty(input.input.value) ? highlightErrorMsg(input.input) : unhighlightErrorMsg(input.input);
+}
+function highlightError(input) {
+  input.classList.add('error');
+}
+function highlightErrorMsg(input) {
+  input.previousElementSibling.lastChild.classList.remove('hidden');
+}
+function unhighlightError(input) {
+  input.classList.remove('error');
+}
+function unhighlightErrorMsg(input) {
+  input.previousElementSibling.lastChild.classList.add('hidden');
+}
+function checkForm() {
+  let noErrors = true;
+  if (currentStep==1) {
+    info.forEach(input => {
+      unhighlightError(input.input);
+      unhighlightErrorMsg(input.input);
+    });
+    info.forEach(input => {
+      if (!input.check(input.input.value)) {
+        highlightError(input.input);
+        checkEmpty(input.input.value) ? highlightErrorMsg(input.input) : unhighlightErrorMsg(input.input);
+        noErrors = false;
+      } 
+    });
+  }
+  return noErrors;
+}
 
 // **** Plan & Add-ons Functions ****
 function changePlan(id) {
@@ -269,22 +327,24 @@ function printSummary() {
 // **** Step Navigation Functions ****
 function goToNextStep() {
   if (currentStep<5) {
-    const oldStep = currentStep - 1;
-    let oldStepView = findStep(oldStep);
-    let newStepView = findStep(currentStep);
-    changeSidebarHighlight(oldStep, currentStep);
-    currentStep++;
-    checkButtonText();
-    oldStepView.classList.add('hidden');
-    if (currentStep==2) {
-      showBackButton()
-    };
-    console.log(currentStep);
-    hideNavButtons(); 
-    if (currentStep==4) {
-      printSummary();
+    if (checkForm()) {
+      const oldStep = currentStep - 1;
+      let oldStepView = findStep(oldStep);
+      let newStepView = findStep(currentStep);
+      changeSidebarHighlight(oldStep, currentStep);
+      currentStep++;
+      checkButtonText();
+      oldStepView.classList.add('hidden');
+      if (currentStep==2) {
+        showBackButton()
+      };
+      console.log(currentStep);
+      hideNavButtons(); 
+      if (currentStep==4) {
+        printSummary();
+      }
+      newStepView.classList.remove('hidden');
     }
-    newStepView.classList.remove('hidden');
   }
 }
 function goToPreviousStep() {
@@ -371,6 +431,9 @@ window.onload = () => {
   backBtn.addEventListener("click", (e)=>{
     e.preventDefault();
     goToPreviousStep();
+  });
+  info.forEach(input => {
+    input.input.addEventListener("focusout", ()=>{quickCheck(input)});
   });
   yearlyCheck.addEventListener('change', changeYearly);
   onlineCheck.addEventListener('change', changeOnline);
