@@ -39,20 +39,6 @@
   font-weight: normal;
 }
 
-/* Text Colours
-.blue-text {
-  color: var(--marine-blue);
-}
-.purple-text {
-  color: var(--purplish-blue);
-}
-.grey-text {
-  color: var(--cool-grey);
-}
-.white-text {
-  color: var(--white);
-} */
-
 body {
   background-color: var(--magnolia);
   display: flex;
@@ -82,6 +68,9 @@ main {
 }
 .mobile-only {
   display: none;
+}
+*:focus {
+  outline: none;
 }
 
 /* Sidebar */
@@ -170,6 +159,7 @@ form {
 .card:hover,
 .card:focus {
   border: 1px solid var(--purplish-blue);
+  /* outline: none; */
 }
 
 /* Step 1 */
@@ -216,7 +206,7 @@ input::placeholder {
 }
 #step-1 input:focus {
   border: 1px solid var(--purplish-blue);
-  outline: none;
+  /* outline: none; */
 }
 
 /* Step 2 */
@@ -277,6 +267,10 @@ input::placeholder {
   background-color: var(--marine-blue);
   transition: var(--transition-spd);
 }
+#plan-slider:focus ~ .slider {
+  outline: 1px solid var(--purplish-blue);
+  outline-offset: 2px;
+}
 .slider:before {
   position: absolute;
   border-radius: 50%;
@@ -298,6 +292,12 @@ input:checked + .slider:before {
 .add-on.card {
   padding: 0;
   margin-bottom: 1rem;
+}
+.add-on input:focus ~ .checkbox {
+  border-color: var(--purplish-blue);
+}
+.add-on.active input:focus ~ .checkbox {
+  border-color: var(--strawberry-red);
 }
 .card label {
   cursor: pointer;
@@ -455,8 +455,10 @@ button {
   color: var(--cool-grey);
   justify-self: flex-start;
 }
-.back-btn:hover {
+.back-btn:hover,
+.back-btn:focus {
   color: var(--marine-blue);
+  /* outline: none; */
 }
 #next-btn {
   justify-self: flex-end;
@@ -470,9 +472,16 @@ button {
   background: var(--marine-blue);
   color: var(--light-grey);
 }
-#next-btn:hover {
+#next-btn.disabled:hover,
+#next-btn.disabled:focus {
+  background-color: var(--marine-blue);
+  opacity: 0.8;
+}
+#next-btn:hover,
+#next-btn:focus {
   background-color: var(--pastel-blue);
-  color: white;
+  color: var(--white);
+  /* outline: none; */
 }
 
 /* Footer - Attribution */

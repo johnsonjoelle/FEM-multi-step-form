@@ -150,7 +150,6 @@ function emailCheck(val) {
 }
 function phoneCheck(val) {
   let pattern = /^\+(?:[0-9]\s?){6,14}[0-9]$/;
-  console.log(val);
   if (pattern.test(val)) {
     return true;
   }
@@ -162,12 +161,18 @@ function quickCheck(input) {
 }
 function highlightError(input) {
   input.classList.add('error');
+  if(!nextBtn.classList.contains('disabled')) {
+    nextBtn.classList.add('disabled');
+  }
 }
 function highlightErrorMsg(input) {
   input.previousElementSibling.lastChild.classList.remove('hidden');
 }
 function unhighlightError(input) {
   input.classList.remove('error');
+  if(nextBtn.classList.contains('disabled')) {
+    nextBtn.classList.remove('disabled');
+  }
 }
 function unhighlightErrorMsg(input) {
   input.previousElementSibling.lastChild.classList.add('hidden');
@@ -193,7 +198,6 @@ function checkForm() {
 // **** Plan & Add-ons Functions ****
 function changePlan(id) {
   userPlan = id;
-  console.log(id);
   switch (id) {
     case 1:
       userPlanCost = arcadeCost;
@@ -261,13 +265,16 @@ function printPlan() {
   let duration = "";
   switch (userPlan) {
     case 1:
-      title = "Arcade"
+      title = "Arcade";
+      userPlanCost = arcadeCost;
       break;
     case 2:
-      title = "Advanced"
+      title = "Advanced";
+      userPlanCost = advancedCost;
       break;
     case 3:
-    title = "Pro"
+    title = "Pro";
+    userPlanCost = proCost;
       break;
   
     default:
@@ -318,8 +325,8 @@ function printAddons() {
   }
 }
 function printSummary() {
-  totalCost = userPlanCost;
   printPlan();
+  totalCost = userPlanCost;
   printAddons();
   document.getElementById('total-cost').innerText = totalCost;
 }
@@ -338,7 +345,6 @@ function goToNextStep() {
       if (currentStep==2) {
         showBackButton()
       };
-      console.log(currentStep);
       hideNavButtons(); 
       if (currentStep==4) {
         printSummary();
@@ -421,7 +427,6 @@ function hideNavButtons() {
 }
 
 window.onload = () => {
-  // Initialize form
 
   // Event Listeners
   nextBtn.addEventListener("click", (e)=>{
@@ -444,17 +449,41 @@ window.onload = () => {
     removePlanHighlight();
     planArc.classList.add('active');
   });
+  planArc.addEventListener("keydown", (e)=>{
+    if(e.key==" ") {
+      changePlan(1);
+      removePlanHighlight();
+      planArc.classList.add('active');
+    }
+  });
   planAdv.addEventListener("click", ()=>{
     changePlan(2);
     removePlanHighlight();
     planAdv.classList.add('active');
+  });
+  planAdv.addEventListener("keydown", (e)=>{
+    if(e.key==" ") {
+      changePlan(2);
+      removePlanHighlight();
+      planAdv.classList.add('active');
+    }
   });
   planPro.addEventListener("click", ()=>{
     changePlan(3);
     removePlanHighlight();
     planPro.classList.add('active');
   });
+  planPro.addEventListener("keydown", ()=>{
+    if(e.key==" ") {
+      changePlan(3);
+      removePlanHighlight();
+      planPro.classList.add('active');
+    }
+  });
   changeLink.addEventListener('click', goToPlans);
+  changeLink.addEventListener('keydown', (e)=>{
+    if(e.key==" ") {goToPlans()}
+  });
 
   checkCheckmarks();
 };

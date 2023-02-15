@@ -62,11 +62,11 @@
           <h2 class="section-title">Personal info</h2>
           <p class="step-guide">Please provide your name, email address, and phone number.</p>
           <label for="name">Name<span class="error-msg hidden">This field is required</span></label>
-          <input type="text" name="name" id="name" placeholder="e.g. Stephen King" data-id="name">
+          <input type="text" name="name" id="name" placeholder="e.g. Stephen King">
           <label for="email">Email Address<span class="error-msg hidden">This field is required</span></label>
-          <input type="text" name="email" id="email" placeholder="e.g. stephenking@lorem.com" data-id="email">
+          <input type="text" name="email" id="email" placeholder="e.g. stephenking@lorem.com">
           <label for="phone">Phone Number<span class="error-msg hidden">This field is required</span></label>
-          <input type="text" name="phone" id="phone" placeholder="e.g. +1 234 567 890" data-id="phone">
+          <input type="text" name="phone" id="phone" placeholder="e.g. +1 234 567 890">
         </section>
         <!-- Step 1 End -->
 
@@ -75,7 +75,7 @@
           <h2 class="section-title">Select your plan</h2>
           <p class="step-guide">You have the option of monthly or yearly billing.</p>
           <div class="plans">
-            <div class="plan card active" id="arcade">
+            <div class="plan card active" id="arcade" tabindex="0">
               <img src="assets/images/icon-arcade.svg" class="plan-icon">
               <div>
                 <h3 class="plan-title">Arcade</h3>
@@ -83,7 +83,7 @@
                 <p class="yearly plan-special hidden">2 months free</p>
               </div>
             </div>
-            <div class="plan card" id="advanced">
+            <div class="plan card" id="advanced" tabindex="0">
               <img src="assets/images/icon-advanced.svg" class="plan-icon">
               <div>
                 <h3 class="plan-title">Advanced</h3>
@@ -91,7 +91,7 @@
                 <p class="yearly plan-special hidden">2 months free</p>
               </div>
             </div>
-            <div class="plan card" id="pro">
+            <div class="plan card" id="pro" tabindex="0">
               <img src="assets/images/icon-pro.svg" class="plan-icon">
               <div>
                 <h3 class="plan-title">Pro</h3>
@@ -164,7 +164,7 @@
           <div class="summary summary-plan">
             <div>
               <p id="summary-plan-title"></p>
-              <p id="change-plan">Change</p>
+              <p id="change-plan" tabindex="0">Change</p>
             </div>
             <p class="summary-plan-cost">$<span id="summary-plan-cost"></span>/<span class="unit">mo</span></p>
           </div>
@@ -191,7 +191,7 @@
       </section>
       <section class="button-container" id="buttons">
         <button id="back-btn" class="back-btn hidden">Go Back</button>
-        <button type="submit" id="next-btn">Next Step</button>
+        <button type="submit" id="next-btn" class="disabled">Next Step</button>
       </section>
     </form>
     
